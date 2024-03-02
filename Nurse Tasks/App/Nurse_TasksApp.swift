@@ -7,19 +7,23 @@
 
 import SwiftUI
 import SwiftData
+import Firebase
 
 @main
 struct Nurse_TasksApp: App {
     
     @StateObject var taskViewModel:TaskViewModel = TaskViewModel()
+    @StateObject var authViewModel: AuthViewModel = AuthViewModel()
     
     init(){
         RemindManager.instance.requestAuthorization()
+        FirebaseApp.configure()
     }
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(taskViewModel)
+                .environmentObject(authViewModel)
         }
     }
 }
