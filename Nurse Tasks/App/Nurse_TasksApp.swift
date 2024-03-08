@@ -18,6 +18,8 @@ struct Nurse_TasksApp: App {
     init(){
         RemindManager.instance.requestAuthorization()
         FirebaseApp.configure()
+        
+        // taskViewModel = TaskViewModel(authViewModel: authViewModel)
     }
     var body: some Scene {
         WindowGroup {

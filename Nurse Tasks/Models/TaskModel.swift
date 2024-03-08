@@ -14,6 +14,7 @@ struct TaskModel:Identifiable,Codable,Equatable{
     
     
     var id:String
+    var email: String
     var clientName: String
     var assignedTo : String
     var location: Address
@@ -27,6 +28,7 @@ struct TaskModel:Identifiable,Codable,Equatable{
     
     init(){
         id = UUID().uuidString
+        email = ""
         clientName = ""
         assignedTo = ""
         location = Address()
@@ -40,8 +42,9 @@ struct TaskModel:Identifiable,Codable,Equatable{
         endTime = StringDate(date:currentdate)
     }
     
-    init(clientName:String, assignedTo:String,street: String,city:String,startTime:StringDate,endTime:StringDate,taskTitle:String,notes:String,reminderEnable:Bool,status:Bool,type:Bool){
+    init(clientName:String, email: String, assignedTo:String,street: String,city:String,startTime:StringDate,endTime:StringDate,taskTitle:String,notes:String,reminderEnable:Bool,status:Bool,type:Bool){
         id = UUID().uuidString
+        self.email = email
         self.clientName = clientName
         self.assignedTo = assignedTo
         location = Address(street: street, city:city)
@@ -55,8 +58,9 @@ struct TaskModel:Identifiable,Codable,Equatable{
         
     }
     
-    init(id:String = UUID().uuidString, clientName:String, assignedTo:String,street: String,city:String,startTime:StringDate,endTime:StringDate,taskTitle:String,notes:String,reminderEnable:Bool,status:Bool,type:Bool){
+    init(id:String = UUID().uuidString, email: String, clientName:String, assignedTo:String,street: String,city:String,startTime:StringDate,endTime:StringDate,taskTitle:String,notes:String,reminderEnable:Bool,status:Bool,type:Bool){
         self.id = id
+        self.email = email
         self.clientName = clientName
         self.assignedTo = assignedTo
         location = Address(street: street, city:city)
@@ -75,7 +79,7 @@ struct TaskModel:Identifiable,Codable,Equatable{
         }else{
             
         }
-        return TaskModel(id: id, clientName: clientName, assignedTo: assignedTo, street:location.street, city: location.city, startTime: startTime, endTime: endTime, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnabled, status: status, type: type)
+        return TaskModel(id: id, email: email, clientName: clientName, assignedTo: assignedTo, street:location.street, city: location.city, startTime: startTime, endTime: endTime, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnabled, status: status, type: type)
     }
 }
 

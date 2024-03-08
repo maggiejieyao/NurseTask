@@ -83,11 +83,17 @@ struct AddTaskView: View {
             print(error.localizedDescription)
         }
     }
-    func saveBtnPressed(){
-        
-        taskViewModel.addTask(id:id, clientName: clientName, assignedTo: assignedTo, street: street, city: city, startTime: startT, endTime: endT, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnabled, status: status, type: type)
-        
-        presentationMode.wrappedValue.dismiss()
+    @MainActor
+    func saveBtnPressed() {
+        Task {
+            do {
+                try? await taskViewModel.addTask(id:id, clientName: clientName, assignedTo: assignedTo, street: street, city: city, startTime: startT, endTime: endT, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnabled, status: status, type: type)
+                
+                presentationMode.wrappedValue.dismiss()
+            } catch {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
 }
 
