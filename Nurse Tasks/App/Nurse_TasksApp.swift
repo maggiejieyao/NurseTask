@@ -12,14 +12,16 @@ import Firebase
 @main
 struct Nurse_TasksApp: App {
     
-    @StateObject var taskViewModel:TaskViewModel = TaskViewModel()
     @StateObject var authViewModel: AuthViewModel = AuthViewModel()
+    @StateObject var taskViewModel:TaskViewModel
     
     init(){
         RemindManager.instance.requestAuthorization()
         FirebaseApp.configure()
         
-        // taskViewModel = TaskViewModel(authViewModel: authViewModel)
+        let userSession = FirebaseAuth.Auth.auth().currentUser
+        
+        _taskViewModel = StateObject(wrappedValue: TaskViewModel(userSession: userSession))
     }
     var body: some Scene {
         WindowGroup {

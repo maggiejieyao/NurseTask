@@ -113,9 +113,11 @@ struct DetailTaskView: View {
 
 struct DetailTaskView_Previews:PreviewProvider{
     static var previews: some View{
+        let authViewModel = AuthViewModel()
+        let taskViewModel = TaskViewModel(userSession: authViewModel.userSession)
         DetailTaskView(task: TaskModel.sampleTask)
-            .environmentObject(TaskViewModel())
-            .environmentObject(AuthViewModel())
+            .environmentObject(taskViewModel)
+            .environmentObject(authViewModel)
     }
 }
 

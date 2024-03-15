@@ -15,32 +15,37 @@ class TaskViewModel: ObservableObject{
         }
     }
     let taskKey: String = "data.json"
-    // let authViewModel: AuthViewModel // Property to instance of AuthViewModel
+    //let authViewModel: AuthViewModel // Property to instance of AuthViewModel
+    @Published var userSession: FirebaseAuth.User?
     
-    init(){
-        getTasks()
+//    init(){
+//        getTasks()
+//    }
+    
+    init(userSession: FirebaseAuth.User?) {
+        
+        self.userSession = userSession
+        
+        getTasks(userSession: userSession)
     }
-    //    int(authViewModel: AuthViewModel) {
-    //        getTasks()
-    //        self.authViewModel = authViewModel
-    //    }
         
-    //    func getTasks(){
-    //        /*
-    //        let existingTasks:[TaskModel] = TaskModel.allTasks
-    //        tasks.append(contentsOf: existingTasks)*/
-    //        guard let data = UserDefaults.standard.data(forKey: taskKey),
-    //              let savedTasks = try? JSONDecoder().decode([TaskModel].self, from: data)
-    //        else{
-    //            return
-    //        }
-    //        self.tasks = savedTasks
-    //
-    //    }
+//    func getTasks(){
+//        /*
+//        let existingTasks:[TaskModel] = TaskModel.allTasks
+//        tasks.append(contentsOf: existingTasks)*/
+//        guard let data = UserDefaults.standard.data(forKey: taskKey),
+//                let savedTasks = try? JSONDecoder().decode([TaskModel].self, from: data)
+//        else{
+//            return
+//        }
+//        self.tasks = savedTasks
+//    
+//    }
         
-    func getTasks() {
+    func getTasks(userSession: FirebaseAuth.User?) {
+        print("User session: \(userSession?.email)")
         Firestore.firestore().collection("tasks")
-            .whereField("email", isEqualTo: "ben@gmail.com")
+            .whereField("email", isEqualTo: userSession?.email ?? "")
             .addSnapshotListener
         { (snapshot, error) in
             if let error = error {
@@ -70,20 +75,25 @@ class TaskViewModel: ObservableObject{
         let sT = StringDate(date: startTime)
         let eT = StringDate(date: endTime)
         
-        do {
+        if let email = self.userSession?.email {
             
-            let newTask = TaskModel(id: id, email: "ben@gmail.com", clientName: clientName, assignedTo: assignedTo, street: street, city: city, startTime: sT, endTime: eT, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnable, status: status, type: type)
-            
-            if(reminderEnable){
-                //RemindManager.instance.scheduleNotification(title: "first", subtitle: "test")
-            }
             do {
-                let encodeTask = try Firestore.Encoder().encode(newTask)
-                try await Firestore.firestore().collection("tasks").document(newTask.id).setData(encodeTask)
+                
+                let newTask = TaskModel(id: id, email: email, clientName: clientName, assignedTo: assignedTo, street: street, city: city, startTime: sT, endTime: eT, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnable, status: status, type: type)
+                
+                if(reminderEnable){
+                    //RemindManager.instance.scheduleNotification(title: "first", subtitle: "test")
+                }
+                do {
+                    let encodeTask = try Firestore.Encoder().encode(newTask)
+                    try await Firestore.firestore().collection("tasks").document(newTask.id).setData(encodeTask)
+                }
+                //        tasks.append(newTask)
+            } catch {
+                print("Error getting user email: \(error.localizedDescription)")
             }
-            //        tasks.append(newTask)
-        } catch {
-            print("Error getting user email: \(error.localizedDescription)")
+        } else {
+            print ("User session does not contain an email")
         }
     }
     

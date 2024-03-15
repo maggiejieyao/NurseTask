@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     
@@ -26,9 +28,11 @@ struct ContentView: View {
 struct ContentView_Previews:
     PreviewProvider{
     static var previews: some View{
+        let authViewModel = AuthViewModel()
+        let taskViewModel = TaskViewModel(userSession: authViewModel.userSession)
         ContentView()
-            .environmentObject(TaskViewModel())
-            .environmentObject(AuthViewModel())
+            .environmentObject(taskViewModel)
+            .environmentObject(authViewModel)
     }
     
 }

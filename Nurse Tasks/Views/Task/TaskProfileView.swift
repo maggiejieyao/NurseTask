@@ -120,9 +120,11 @@ struct TaskProfileView: View {
 struct TaskProfileView_Previews:
     PreviewProvider{
     static var previews: some View{
+        let authViewModel = AuthViewModel()
+        let taskViewModel = TaskViewModel(userSession: authViewModel.userSession)
         TaskProfileView()
-        .environmentObject(TaskViewModel())
-        .environmentObject(AuthViewModel())
+        .environmentObject(taskViewModel)
+        .environmentObject(authViewModel)
     }
     
 }
