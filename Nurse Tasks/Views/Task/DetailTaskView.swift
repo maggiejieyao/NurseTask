@@ -50,7 +50,7 @@ struct DetailTaskView: View {
                 }
             }
             Button(action: {
-                taskViewModel.updateTask(task: task)
+                //taskViewModel.updateTask(task: task)
                 showSaveAlert = true
             }, label: {
                 Text("Save")
@@ -115,6 +115,7 @@ struct DetailTaskView_Previews:PreviewProvider{
     static var previews: some View{
         DetailTaskView(task: TaskModel.sampleTask)
             .environmentObject(TaskViewModel())
+            //.environmentObject(AuthViewModel())
     }
 }
 

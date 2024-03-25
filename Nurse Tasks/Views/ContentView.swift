@@ -6,111 +6,203 @@
 //
 
 import SwiftUI
-import SwiftData
-enum TaskFilter: String{
-    static var allFilters: [TaskFilter]
-    {
-        return [.All,.Personal,.Work,.DueToday,.DueNextHour]
-    }
-    case All = "All"
-    case Personal = "Personal"
-    case Work = "Work"
-    case DueNextHour = "DueNextHour"
-    case DueToday = "DueToday"
-}
+import Firebase
+import FirebaseAuth
 
 struct ContentView: View {
-    
-    @EnvironmentObject var taskViewModel:TaskViewModel
-    @State private var searchTerm = ""
-    @State var selectedFilter = TaskFilter.Personal
-    @State var stringDate:StringDate = StringDate(date: Date())
-    
-    var filteredTasks : [TaskModel] {
-        guard !searchTerm.isEmpty else{return taskViewModel.tasks}
-        return taskViewModel.tasks.filter{
-            $0.clientName.localizedStandardContains(searchTerm) ||
-            $0.location.city.localizedStandardContains(searchTerm) ||
-            $0.location.street.localizedStandardContains(searchTerm)
-        }
-    }
-    /*@State var tasks:[TaskModel] = [
-        TaskModel(clientName: "client1", assignedTo: "nurse1", street: "ABC St", city: "Burnaby", startTime: StringDate(date: Date()), endTime: StringDate(date: Date()), taskTitle: "task1", notes: "some notes..", reminderEnable: true, status: false, type: false)
-    ]*/
+    //@EnvironmentObject var authViewModel: AuthViewModel
+    @State private var email = ""
+    @State private var password = ""
+    @State private var fullname = ""
+    @State private var confirmedPassword = ""
+    @State private var userIsLoggedIn = false
+    @EnvironmentObject var taskViewModel: TaskViewModel
     
     var body: some View {
-        NavigationView{
-            List{
-                ForEach(filteredTaskItems(), id:\.id){task in NavigationLink(destination: DetailTaskView(task: task)){
+        
+        if userIsLoggedIn{
+            TabView{
+                TaskProfileView()
+                    .tabItem{
+                        Image(systemName: "doc.badge.plus")
+                    }
+                
+                profile
+                    .tabItem{
+                        Image(systemName: "person.crop.circle")
+                    }
+                 
+            }
+        }else{
+            contentLogin
+        }
+        
+    }
+    
+    var profile : some View{
+        return List{
+            Section{
+                VStack(alignment:.leading, spacing: 4){
+                    Text(email)
+                        .font(.footnote)
+                        .accentColor(.gray)
+                }
+                
+            }
+            Section("Account"){
+                Button{
+                    signout()
+                }label: {
+                    SettingsRowView(imageName: "arrow.left.circle.fill", title: "Sign Out", tintColor: .red)
+                }
+            }
+        }
+    }
+    var contentLogin : some View {
+        
+        return NavigationStack{
+            VStack{
+                //image
+                Image(.nurse)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 80, height: 100)
+                    .padding(.vertical, 40)
+                
+                //form fields
+                VStack(spacing: 24){
+                    InputView(text: $email, title: "Email Address", placeholder: "name@example.com")
+                        .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                    InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
+                }
+                //sign in button
+                
+                Button{
+                    Task{
+                       login()
+                    }
+                }label: {
                     HStack{
-                        VStack(alignment: .leading, content: {
-                            Text("\(task.taskTitle)").bold().font(.title2)
-                            Text("\(task.assignedTo)").font(.title3).foregroundStyle(.gray)
-                        })
+                        Text("SIGN IN")
+                            .fontWeight(.semibold)
+                        Image(systemName: "arrow.right")
                     }
-                    }.padding(6)
+                    .foregroundColor(.white)
+                    .frame(width:UIScreen.main.bounds.width - 32, height: 48)
                 }
-                .onDelete(perform: taskViewModel.deleteTask)
+                .background(Color(.systemBlue))
+                .cornerRadius(10)
+                .padding(.top, 24)
                 
-            }.navigationTitle("Tasks")
-            .listStyle(GroupedListStyle())
-            .searchable(text: $searchTerm, prompt: "Search")
-            
-            .toolbar{
-                ToolbarItem(placement:.topBarLeading){
-                    Button(action: {
+                Spacer()
+                //sign up button
+                NavigationLink(destination: contentRegister){
+                    HStack{
+                        Text("Don't have an account?")
+                        Text("Sign Up")
+                            .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                         
-                    }, label: {
-                        NavigationLink(destination: AddTaskView()) {
-                            Text("Add")
-                        }
-                        
-                    })
-                }
-                
-                ToolbarItem(placement: .confirmationAction){
-                    Picker("", selection: $selectedFilter.animation()){
-                        ForEach(TaskFilter.allFilters, id:\.self){
-                            filter in
-                            Text(filter.rawValue)
-                        }
                     }
                 }
-                
+            }.padding(.horizontal, 20)
+                .onAppear{
+                    Auth.auth().addStateDidChangeListener{auth, user in
+                        if user != nil{
+                            userIsLoggedIn.toggle()
+                        }
+                        
+                    }
+                }
+        }
+    }
+    
+    var contentRegister : some View{
+        
+        return VStack{
+            //image
+            Image(.nurse)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 80, height: 100)
+                .padding(.vertical, 40)
             
+            //form fields
+            VStack(spacing: 24){
+                InputView(text: $email, title: "Email Address", placeholder: "name@example.com")
+                    .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+                
+                InputView(text: $fullname, title: "Full Name", placeholder: "Enter your full name")
+                
+                InputView(text: $password, title: "Password", placeholder: "Enter your password", isSecureField: true)
+                
+                InputView(text: $confirmedPassword, title: "Confirm Password", placeholder: "Confirm your password", isSecureField: true)
+                
             }
+            
+            Button{
+                register()
+            }label: {
+                HStack{
+                    Text("SIGN UP")
+                        .fontWeight(.semibold)
+                    Image(systemName: "arrow.right")
+                }
+                .foregroundColor(.white)
+                .frame(width:UIScreen.main.bounds.width - 32, height: 48)
+            }
+            .background(Color(.systemBlue))
+            .cornerRadius(10)
+            .padding(.top, 24)
+            
+            Spacer()
+            
         }
+        .padding(.horizontal, 20)
+        
         
     }
-    func filteredTaskItems()->[TaskModel]{
-        let date = Date()
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date) + 1
-        let day = calendar.component(.day, from: date)
+        /*
+        Group{
+            if authViewModel.userSession != nil {
+                ProfileView()
+            }else{
+                LoginView()
+            }
+        }*/
+    
+    func login(){
         
-        if selectedFilter == TaskFilter.Personal{
-            return filteredTasks.filter{
-                $0.type == true
+            Auth.auth().signIn(withEmail: email, password: password){result, error in
+                if error != nil{
+                    print("Login failed \(error!.localizedDescription)")
+                }
+                
             }
-        }
-        if selectedFilter == TaskFilter.Work{
-            return filteredTasks.filter{
-                $0.type == false
-            }
-        }
-        if selectedFilter == TaskFilter.DueToday{
-            return filteredTasks.filter{
-                $0.endTime.day == String(day)
-            }
-        }
-        
-        if selectedFilter == TaskFilter.DueNextHour{
-            return filteredTasks.filter{
-                $0.endTime.hour == String(hour)
-            }
-        }
-        return filteredTasks
+            userIsLoggedIn = true
+
     }
+    
+    func signout(){
+        let firebaseAuth = Auth.auth()
+        do {
+          try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+          print("Error signing out: %@", signOutError)
+        }
+        userIsLoggedIn = false
+    }
+    
+    func register(){
+        Auth.auth().createUser(withEmail: email, password: password){result, error in
+            if error != nil{
+                print("Sign up failed \(error!.localizedDescription)")
+            }
+            
+        }
+        userIsLoggedIn = true
+    }
+    
+    
 }
                 
 
@@ -119,7 +211,8 @@ struct ContentView_Previews:
     PreviewProvider{
     static var previews: some View{
         ContentView()
-        .environmentObject(TaskViewModel())
+            .environmentObject(TaskViewModel())
+            //.environmentObject(AuthViewModel())
     }
     
 }
