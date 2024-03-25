@@ -34,9 +34,6 @@ struct TaskProfileView: View {
             $0.location.street.localizedStandardContains(searchTerm)
         }
     }
-    /*@State var tasks:[TaskModel] = [
-        TaskModel(clientName: "client1", assignedTo: "nurse1", street: "ABC St", city: "Burnaby", startTime: StringDate(date: Date()), endTime: StringDate(date: Date()), taskTitle: "task1", notes: "some notes..", reminderEnable: true, status: false, type: false)
-    ]*/
     
     var body: some View {
         
@@ -51,7 +48,10 @@ struct TaskProfileView: View {
                         }
                         }.padding(6)
                     }
-                    .onDelete(perform: taskViewModel.deleteTask)
+                    .onDelete{indexSet in
+                        self.taskViewModel.deleteTask(atOffsets: indexSet)
+                        
+                    }
                     
                 }.navigationTitle("Tasks")
                 .listStyle(GroupedListStyle())
@@ -122,7 +122,6 @@ struct TaskProfileView_Previews:
     static var previews: some View{
         TaskProfileView()
         .environmentObject(TaskViewModel())
-        .environmentObject(AuthViewModel())
     }
     
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct AddTaskView: View {
     @State private var startT: Date = Date()
@@ -22,6 +23,10 @@ struct AddTaskView: View {
     @EnvironmentObject var taskViewModel:TaskViewModel
     @Environment(\.presentationMode) var presentationMode
     @State private var id:String = UUID().uuidString
+    @StateObject var speechRecognizer = SpeechHelper()
+    @State private var isRecording = false
+    @State private var recordedNotes: String = ""
+    
     
     //false -> not complete, true-> completed
     // false-> work task, true-> personal task
@@ -50,6 +55,29 @@ struct AddTaskView: View {
                 Section{
                     TextField("Notes", text: $notes,  axis: .vertical)
                         .lineLimit(3...5)
+                    
+                    VStack {
+                        Text(speechRecognizer.transcript)
+                                        .padding()
+                        
+                        Button(action: {
+                                        if !isRecording {
+                                            speechRecognizer.transcribe()
+                                        } else {
+                                            speechRecognizer.stopTranscribing()
+                                        }
+                                        
+                                        isRecording.toggle()
+                                    }){
+                                        Text(isRecording ? "Stop" : "Record")
+                                            .font(.title)
+                                            .foregroundColor(.white)
+                                            .padding()
+                                            .background(isRecording ? Color.red : Color.blue)
+                                            .cornerRadius(10)
+                                    }
+                    }
+                    
                 }
             }
             Button(action: {
@@ -67,11 +95,7 @@ struct AddTaskView: View {
         }
     }
     
-    func addNewTask(){
-        //ContentView(newtask: task)
-        /*newTask = Task(clientName: task.clientName, assignedTo: task.assignedTo, street:task.location.street,city:task.location.city, startTime: StringDate(date: startT), endTime: StringDate(date: endT), taskTitle: task.taskTitle, notes: task.notes, reminderEnable: task.reminderEnabled, status: task.status, type: task.type)
-        tasks.append(newTask)*/
-    }
+    
     func writeJSON(tasks: [TaskModel]) {
         do {
             let fileURL = try FileManager.default.url(for: .desktopDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -84,10 +108,11 @@ struct AddTaskView: View {
         }
     }
     func saveBtnPressed(){
-        
+        notes = notes + speechRecognizer.transcript
         taskViewModel.addTask(id:id, clientName: clientName, assignedTo: assignedTo, street: street, city: city, startTime: startT, endTime: endT, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnabled, status: status, type: type)
         
         presentationMode.wrappedValue.dismiss()
+        print("task added!")
     }
 }
 

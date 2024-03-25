@@ -26,5 +26,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:588565743210:ios:84ebfb58129685cc38ac13</string>
+	<key>DATABASE_URL</key>
+	<string>https://nursetask-1cd2b-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

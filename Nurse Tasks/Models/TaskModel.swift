@@ -12,8 +12,8 @@ struct TaskModel:Identifiable,Codable,Equatable{
     }
     
     
-    
     var id:String
+    var userId: String
     var clientName: String
     var assignedTo : String
     var location: Address
@@ -25,8 +25,10 @@ struct TaskModel:Identifiable,Codable,Equatable{
     //static let allLocations:[Address] = Bundle.main.decode(file: <#T##String#>)
     static let sampleTask : TaskModel = allTasks[0]
     
+    
     init(){
         id = UUID().uuidString
+        userId = ""
         clientName = ""
         assignedTo = ""
         location = Address()
@@ -40,8 +42,9 @@ struct TaskModel:Identifiable,Codable,Equatable{
         endTime = StringDate(date:currentdate)
     }
     
-    init(clientName:String, assignedTo:String,street: String,city:String,startTime:StringDate,endTime:StringDate,taskTitle:String,notes:String,reminderEnable:Bool,status:Bool,type:Bool){
+    init(userId:String, clientName:String, assignedTo:String,street: String,city:String,startTime:StringDate,endTime:StringDate,taskTitle:String,notes:String,reminderEnable:Bool,status:Bool,type:Bool){
         id = UUID().uuidString
+        self.userId = userId
         self.clientName = clientName
         self.assignedTo = assignedTo
         location = Address(street: street, city:city)
@@ -52,11 +55,11 @@ struct TaskModel:Identifiable,Codable,Equatable{
         self.reminderEnabled = reminderEnable
         self.startTime = startTime
         self.endTime = endTime
-        
     }
     
-    init(id:String = UUID().uuidString, clientName:String, assignedTo:String,street: String,city:String,startTime:StringDate,endTime:StringDate,taskTitle:String,notes:String,reminderEnable:Bool,status:Bool,type:Bool){
+    init(id:String = UUID().uuidString, userId:String, clientName:String, assignedTo:String,street: String,city:String,startTime:StringDate,endTime:StringDate,taskTitle:String,notes:String,reminderEnable:Bool,status:Bool,type:Bool){
         self.id = id
+        self.userId = userId
         self.clientName = clientName
         self.assignedTo = assignedTo
         location = Address(street: street, city:city)
@@ -75,7 +78,7 @@ struct TaskModel:Identifiable,Codable,Equatable{
         }else{
             
         }
-        return TaskModel(id: id, clientName: clientName, assignedTo: assignedTo, street:location.street, city: location.city, startTime: startTime, endTime: endTime, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnabled, status: status, type: type)
+        return TaskModel(id: id, userId: userId, clientName: clientName, assignedTo: assignedTo, street:location.street, city: location.city, startTime: startTime, endTime: endTime, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnabled, status: status, type: type)
     }
 }
 

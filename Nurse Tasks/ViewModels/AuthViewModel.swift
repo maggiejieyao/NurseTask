@@ -8,11 +8,46 @@
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseAnalytics
 
-@MainActor
+
+
 class AuthViewModel: ObservableObject{
+    /*
     @Published var userSession: FirebaseAuth.User?
     @Published var currentUser: User?
+    
+    init(){
+        self.userSession = Auth.auth().currentUser
+        
+        Task{
+            await fetchUser()
+            print("got user info")
+        }
+    }
+    func signIn(withEmail email: String, password: String) async throws{
+        do{
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            self.userSession = result.user
+            print("signed in")
+        }catch{
+            print("DEBUG: Failed to log in with errror \(error.localizedDescription)")
+        }
+    }
+    
+    func fetchUser() async{
+        guard let uid = Auth.auth().currentUser?.uid else{
+            return
+        }
+        guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else{
+            return
+        }
+        
+        self.currentUser = try? snapshot.data(as: User.self)
+        print("Current user \(self.userSession?.uid)")
+    }
+    /*
+    
     
     init(){
         //Firestore.firestore().clearPersistence()
@@ -77,5 +112,6 @@ class AuthViewModel: ObservableObject{
         }
         
         self.currentUser = try? snapshot.data(as: User.self)
-    }
+    }*/
+    */
 }
