@@ -8,8 +8,8 @@
 import Foundation
 import Firebase
 import FirebaseCore
-import FirebaseFirestore
 import FirebaseAuth
+
 
 @MainActor
 class TaskViewModel: ObservableObject{
@@ -25,16 +25,17 @@ class TaskViewModel: ObservableObject{
     private var handle : AuthStateDidChangeListenerHandle?
     let taskKey: String = "data.json"
     
+    
     init(){
         self.ref = Database.database().reference()
         
         //self.userId = Auth.auth().currentUser?.uid ?? ""
         //print("user1\(userId)")
         listen()
-    
-        
         
     }
+    
+    
     func listen(){
         handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
                     if let user = user {

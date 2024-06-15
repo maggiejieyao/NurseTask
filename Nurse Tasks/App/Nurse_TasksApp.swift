@@ -24,12 +24,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct Nurse_TasksApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var taskViewModel:TaskViewModel = TaskViewModel()
-    
+    @StateObject var authViewModel:AuthViewModel = AuthViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(taskViewModel)
+                .environmentObject(authViewModel)
+            
         }
     }
 }

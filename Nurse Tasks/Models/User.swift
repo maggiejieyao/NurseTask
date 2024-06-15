@@ -7,10 +7,19 @@
 
 import Foundation
 
-struct User:Identifiable, Codable{
+struct TaskUser:Identifiable, Codable{
     let id: String
-    let fullname: String
-    let email: String
+    var fullname: String
+    var email: String
+    var profileUrl: URL
+    private var DEFAULT_PROFILE_URL = URL(string:"https://drive.usercontent.google.com/download?id=1_0I3TaBVBCGIkjHXhm5bd9hn3ZzU_8AA")
+    
+    init(id: String, fullname: String, email: String) {
+        self.id = id
+        self.fullname = fullname
+        self.email = email
+        self.profileUrl = DEFAULT_PROFILE_URL ?? URL(string: "")!
+    }
     
     var initials: String{
         let formatter  = PersonNameComponentsFormatter()
@@ -21,8 +30,32 @@ struct User:Identifiable, Codable{
         
         return ""
     }
+    func getEmail()->String{
+        return email
+    }
+    
+    func getUrl()->URL{
+        return profileUrl
+    }
+    
+    func getFullname()->String{
+        return fullname
+    }
+    
+    mutating func setUrl(profileUrl:String){
+        self.profileUrl = URL(string:profileUrl) ?? DEFAULT_PROFILE_URL!
+    }
+    
+    mutating func setEmail(email: String){
+        self.email = email
+    }
+    
+    mutating func setFullname(fullname: String){
+        self.fullname = fullname
+    }
 }
 
-extension User{
-    static var MOCK_USER = User(id: NSUUID().uuidString, fullname: "Maggie Wu", email: "example@my.bcit.ca")
+extension TaskUser{
+    static var MOCK_USER = TaskUser(id: NSUUID().uuidString, fullname: "Test a", email: "test@test.com")
+    
 }

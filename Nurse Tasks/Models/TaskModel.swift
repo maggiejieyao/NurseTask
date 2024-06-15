@@ -11,7 +11,6 @@ struct TaskModel:Identifiable,Codable,Equatable{
         return lhs.id == rhs.id
     }
     
-    
     var id:String
     var userId: String
     var clientName: String
