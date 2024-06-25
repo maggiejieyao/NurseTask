@@ -18,6 +18,8 @@
 		EA08BA702B06DE830038EDCF /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08BA6F2B06DE830038EDCF /* TaskModel.swift */; };
 		EA08BAA92B06EDF50038EDCF /* DetailTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08BAA82B06EDF50038EDCF /* DetailTaskView.swift */; };
 		EA08BAAB2B06FE310038EDCF /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08BAAA2B06FE310038EDCF /* AddTaskView.swift */; };
+		EA1C706F2C2A467000FB6647 /* LaoctionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C706E2C2A467000FB6647 /* LaoctionManager.swift */; };
+		EA4614322C1E29E3008CD9CE /* TaskViewNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4614312C1E29E3008CD9CE /* TaskViewNodeModel.swift */; };
 		EA4768872B9A371A00ED3F4F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = EA4768862B9A371A00ED3F4F /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		EA4768FA2BA3C32B00ED3F4F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EA4768F92BA3C32B00ED3F4F /* FirebaseDatabase */; };
 		EA4768FD2BA3C6AD00ED3F4F /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EA4768FC2BA3C6AD00ED3F4F /* FirebaseDatabaseSwift */; };
@@ -86,6 +88,8 @@
 		EA08BA6F2B06DE830038EDCF /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		EA08BAA82B06EDF50038EDCF /* DetailTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskView.swift; sourceTree = "<group>"; };
 		EA08BAAA2B06FE310038EDCF /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		EA1C706E2C2A467000FB6647 /* LaoctionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaoctionManager.swift; sourceTree = "<group>"; };
+		EA4614312C1E29E3008CD9CE /* TaskViewNodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewNodeModel.swift; sourceTree = "<group>"; };
 		EA4769302BB12CC000ED3F4F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EA4769362BB13DD900ED3F4F /* SpeechHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechHelper.swift; sourceTree = "<group>"; };
 		EA4769392BB152B200ED3F4F /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
@@ -231,6 +235,8 @@
 				EABD08DE2B0F871800BA0D78 /* TaskViewModel.swift */,
 				EAEC740B2C1686870018CF90 /* ngodbConnector.swift */,
 				EA4769362BB13DD900ED3F4F /* SpeechHelper.swift */,
+				EA4614312C1E29E3008CD9CE /* TaskViewNodeModel.swift */,
+				EA1C706E2C2A467000FB6647 /* LaoctionManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -409,6 +415,7 @@
 				D8078B2B2AFCA45B002B28DA /* ContentView.swift in Sources */,
 				EA08BAAB2B06FE310038EDCF /* AddTaskView.swift in Sources */,
 				EACAC57E2B92FFC7009E5B6C /* SettingsRowView.swift in Sources */,
+				EA4614322C1E29E3008CD9CE /* TaskViewNodeModel.swift in Sources */,
 				EA08BAA92B06EDF50038EDCF /* DetailTaskView.swift in Sources */,
 				EACAC5802B931255009E5B6C /* User.swift in Sources */,
 				EA47693A2BB152B200ED3F4F /* InputView.swift in Sources */,
@@ -416,6 +423,7 @@
 				EAEC740C2C1686870018CF90 /* ngodbConnector.swift in Sources */,
 				EAD8DEC92BD621EE00CB7466 /* AuthViewModel.swift in Sources */,
 				EA4769372BB13DD900ED3F4F /* SpeechHelper.swift in Sources */,
+				EA1C706F2C2A467000FB6647 /* LaoctionManager.swift in Sources */,
 				EAED591B2BD6730B006A3062 /* NetworkMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

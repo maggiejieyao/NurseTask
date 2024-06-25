@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseAuth
+import MapKit
 
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
@@ -19,7 +20,7 @@ struct ContentView: View {
     @State private var confirmedPassword = ""
     @State private var showNetworkAlert = false
     @StateObject var monitor = Monitor()
-    
+    @StateObject var mapManager = LocationManager()
     
     var body: some View {
         
@@ -34,6 +35,10 @@ struct ContentView: View {
                     .tabItem{
                         Image(systemName: "person.crop.circle")
                     }
+                map
+                    .tabItem {
+                        Image(systemName: "map.fill")
+                    }
                  
             }
             
@@ -42,7 +47,11 @@ struct ContentView: View {
         }
         
     }
-    
+    var map: some View {
+        Map(coordinateRegion: $mapManager.region, showsUserLocation: true)
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: 400, height: 300)
+    }
     var profile : some View{
         
         return List{
@@ -276,5 +285,3 @@ struct ContentView_Previews:
     }
     
 }
-
-      

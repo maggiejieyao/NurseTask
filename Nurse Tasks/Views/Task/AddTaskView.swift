@@ -109,10 +109,16 @@ struct AddTaskView: View {
     }
     func saveBtnPressed(){
         notes = notes + speechRecognizer.transcript
-        taskViewModel.addTask(id:id, clientName: clientName, assignedTo: assignedTo, street: street, city: city, startTime: startT, endTime: endT, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnabled, status: status, type: type)
-        
-        presentationMode.wrappedValue.dismiss()
-        print("task added!")
+        Task{
+            do{
+                try await taskViewModel.addTask(id:id, clientName: clientName, assignedTo: assignedTo, street: street, city: city, startTime: startT, endTime: endT, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnabled, status: status, type: type)
+                presentationMode.wrappedValue.dismiss()
+                print("task added!")
+            }catch{
+                print(error)
+            }
+        }
+
     }
 }
 

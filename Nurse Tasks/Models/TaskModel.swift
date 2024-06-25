@@ -79,6 +79,10 @@ struct TaskModel:Identifiable,Codable,Equatable{
         }
         return TaskModel(id: id, userId: userId, clientName: clientName, assignedTo: assignedTo, street:location.street, city: location.city, startTime: startTime, endTime: endTime, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnabled, status: status, type: type)
     }
+    
+    enum CodingKeys: String, CodingKey {
+        case id, userId, clientName, assignedTo, location, taskTitle, notes, type, status, reminderEnabled, startTime, endTime
+    }
 }
 
 public struct Address:Codable{
@@ -108,6 +112,23 @@ public struct StringDate:Codable{
 
 }
 
+public struct ErrorData : Codable {
+    var message: String
+    
+    enum CodingKeys: String, CodingKey {
+        case message
+    }
+}
+
+public struct Tasks: Codable{
+    var message: String
+    var tasks: [TaskModel]
+    
+    enum CodingKeys: String, CodingKey {
+        case message
+        case tasks
+    }
+}
 
 extension Bundle{
     func decode<T:Decodable> (file:String)->T{
