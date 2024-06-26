@@ -26,11 +26,15 @@ struct AddTaskView: View {
     @StateObject var speechRecognizer = SpeechHelper()
     @State private var isRecording = false
     @State private var recordedNotes: String = ""
-    
+    @State private var showingAlert = false
+    @State private var errorMessage = ""
     
     //false -> not complete, true-> completed
     // false-> work task, true-> personal task
     
+    var isFormValid: Bool{
+        !$taskTitle.wrappedValue.isEmpty && !$clientName.wrappedValue.isEmpty && !$assignedTo.wrappedValue.isEmpty && $endT.wrappedValue > $startT.wrappedValue
+    }
     
     var body: some View {
         VStack{
@@ -76,14 +80,18 @@ struct AddTaskView: View {
                                             .background(isRecording ? Color.red : Color.blue)
                                             .cornerRadius(10)
                                     }
-                    }
+                            }
                     
-                }
+                    }
             }
             Button(action: {
-                saveBtnPressed()
-                if(reminderEnabled){
-                    RemindManager.instance.scheduleNotification(title: taskTitle, subtitle:"is due", date: endT, id: id)
+                if(!isFormValid){
+                    showingAlert.toggle()
+                }else{
+                    saveBtnPressed()
+                    if(reminderEnabled){
+                        RemindManager.instance.scheduleNotification(title: taskTitle, subtitle:"is due", date: endT, id: id)
+                    }
                 }
             }, label: {
                 Text("Save")
@@ -92,9 +100,25 @@ struct AddTaskView: View {
                 let notificationContent = UNMutableNotificationContent()
                 notificationContent.badge = 0
             }
+            .alert(isPresented: $showingAlert){
+                Alert(title: Text("Message"), message: errorMessgeAlert())
+            }
+            
         }
     }
     
+    func errorMessgeAlert()-> Text{
+        if $taskTitle.wrappedValue.isEmpty{
+            return Text("Task title is empty")
+        }else if $clientName.wrappedValue.isEmpty{
+            return Text("Client name is empty")
+        }else if $assignedTo.wrappedValue.isEmpty{
+            return Text("Nurse name is empty")
+        }else if $endT.wrappedValue < $startT.wrappedValue{
+            return Text("End time cannot before start time")
+        }
+        return Text("")
+    }
     
     func writeJSON(tasks: [TaskModel]) {
         do {

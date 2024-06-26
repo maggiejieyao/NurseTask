@@ -83,6 +83,10 @@ struct TaskModel:Identifiable,Codable,Equatable{
     enum CodingKeys: String, CodingKey {
         case id, userId, clientName, assignedTo, location, taskTitle, notes, type, status, reminderEnabled, startTime, endTime
     }
+    
+    mutating func setTitleName(titleName:String){
+        self.taskTitle = titleName
+    }
 }
 
 public struct Address:Codable{

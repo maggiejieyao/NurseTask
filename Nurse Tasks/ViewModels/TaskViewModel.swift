@@ -25,7 +25,6 @@ class TaskViewModel: ObservableObject{
     private var handle : AuthStateDidChangeListenerHandle?
     let taskKey: String = "data.json"
     
-    
     init(){
         self.ref = Database.database().reference()
         
@@ -91,6 +90,7 @@ class TaskViewModel: ObservableObject{
     }
     
     func addTask(id: String, clientName: String, assignedTo: String, street:String,city:String, startTime: Date, endTime: Date, taskTitle: String, notes: String, reminderEnable: Bool, status: Bool, type: Bool){
+        
         let sT = StringDate(date: startTime)
         let eT = StringDate(date: endTime)
         let newTask = TaskModel(id: id, userId: userId, clientName: clientName, assignedTo: assignedTo, street: street, city: city, startTime: sT, endTime: eT, taskTitle: taskTitle, notes: notes, reminderEnable: reminderEnable, status: status, type: type)
