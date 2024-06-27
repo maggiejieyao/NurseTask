@@ -106,7 +106,6 @@ struct AddTaskView: View {
             
         }
     }
-    
     func errorMessgeAlert()-> Text{
         if $taskTitle.wrappedValue.isEmpty{
             return Text("Task title is empty")
@@ -114,8 +113,8 @@ struct AddTaskView: View {
             return Text("Client name is empty")
         }else if $assignedTo.wrappedValue.isEmpty{
             return Text("Nurse name is empty")
-        }else if $endT.wrappedValue < $startT.wrappedValue{
-            return Text("End time cannot before start time")
+        }else if $endT.wrappedValue <= $startT.wrappedValue{
+            return Text("End time need larger than start time")
         }
         return Text("")
     }

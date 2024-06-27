@@ -18,7 +18,8 @@
 		EA08BA702B06DE830038EDCF /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08BA6F2B06DE830038EDCF /* TaskModel.swift */; };
 		EA08BAA92B06EDF50038EDCF /* DetailTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08BAA82B06EDF50038EDCF /* DetailTaskView.swift */; };
 		EA08BAAB2B06FE310038EDCF /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA08BAAA2B06FE310038EDCF /* AddTaskView.swift */; };
-		EA1C706F2C2A467000FB6647 /* LaoctionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C706E2C2A467000FB6647 /* LaoctionManager.swift */; };
+		EA1C706F2C2A467000FB6647 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1C706E2C2A467000FB6647 /* LocationManager.swift */; };
+		EA22C0A02C2CD4830088DE51 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA22C09F2C2CD4830088DE51 /* MapView.swift */; };
 		EA4614322C1E29E3008CD9CE /* TaskViewNodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4614312C1E29E3008CD9CE /* TaskViewNodeModel.swift */; };
 		EA4768872B9A371A00ED3F4F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = EA4768862B9A371A00ED3F4F /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		EA4768FA2BA3C32B00ED3F4F /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EA4768F92BA3C32B00ED3F4F /* FirebaseDatabase */; };
@@ -38,7 +39,6 @@
 		EACAC58F2B931923009E5B6C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EACAC58E2B931923009E5B6C /* FirebaseStorage */; };
 		EAD8DEC92BD621EE00CB7466 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD8DEC82BD621EE00CB7466 /* AuthViewModel.swift */; };
 		EAD8DECB2BD6253400CB7466 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EAD8DECA2BD6253400CB7466 /* FirebaseAuth */; };
-		EAEC740C2C1686870018CF90 /* ngodbConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEC740B2C1686870018CF90 /* ngodbConnector.swift */; };
 		EAEC740F2C169E960018CF90 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EAEC740E2C169E960018CF90 /* RealmSwift */; };
 		EAED591B2BD6730B006A3062 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAED591A2BD6730B006A3062 /* NetworkMonitor.swift */; };
 /* End PBXBuildFile section */
@@ -88,7 +88,8 @@
 		EA08BA6F2B06DE830038EDCF /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		EA08BAA82B06EDF50038EDCF /* DetailTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskView.swift; sourceTree = "<group>"; };
 		EA08BAAA2B06FE310038EDCF /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
-		EA1C706E2C2A467000FB6647 /* LaoctionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaoctionManager.swift; sourceTree = "<group>"; };
+		EA1C706E2C2A467000FB6647 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		EA22C09F2C2CD4830088DE51 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EA4614312C1E29E3008CD9CE /* TaskViewNodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewNodeModel.swift; sourceTree = "<group>"; };
 		EA4769302BB12CC000ED3F4F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EA4769362BB13DD900ED3F4F /* SpeechHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechHelper.swift; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 		EACAC57D2B92FFC7009E5B6C /* SettingsRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRowView.swift; sourceTree = "<group>"; };
 		EACAC57F2B931255009E5B6C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EAD8DEC82BD621EE00CB7466 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
-		EAEC740B2C1686870018CF90 /* ngodbConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ngodbConnector.swift; sourceTree = "<group>"; };
 		EAED591A2BD6730B006A3062 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -208,6 +208,7 @@
 		EABD08D92B0F6D7B00BA0D78 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				EA22C09F2C2CD4830088DE51 /* MapView.swift */,
 				D8078B2A2AFCA45B002B28DA /* ContentView.swift */,
 				EA4769392BB152B200ED3F4F /* InputView.swift */,
 				EACAC57D2B92FFC7009E5B6C /* SettingsRowView.swift */,
@@ -233,10 +234,9 @@
 			children = (
 				EABD08E02B10073300BA0D78 /* RemindManager.swift */,
 				EABD08DE2B0F871800BA0D78 /* TaskViewModel.swift */,
-				EAEC740B2C1686870018CF90 /* ngodbConnector.swift */,
 				EA4769362BB13DD900ED3F4F /* SpeechHelper.swift */,
 				EA4614312C1E29E3008CD9CE /* TaskViewNodeModel.swift */,
-				EA1C706E2C2A467000FB6647 /* LaoctionManager.swift */,
+				EA1C706E2C2A467000FB6647 /* LocationManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -415,15 +415,15 @@
 				D8078B2B2AFCA45B002B28DA /* ContentView.swift in Sources */,
 				EA08BAAB2B06FE310038EDCF /* AddTaskView.swift in Sources */,
 				EACAC57E2B92FFC7009E5B6C /* SettingsRowView.swift in Sources */,
+				EA22C0A02C2CD4830088DE51 /* MapView.swift in Sources */,
 				EA4614322C1E29E3008CD9CE /* TaskViewNodeModel.swift in Sources */,
 				EA08BAA92B06EDF50038EDCF /* DetailTaskView.swift in Sources */,
 				EACAC5802B931255009E5B6C /* User.swift in Sources */,
 				EA47693A2BB152B200ED3F4F /* InputView.swift in Sources */,
 				D8078B292AFCA45B002B28DA /* Nurse_TasksApp.swift in Sources */,
-				EAEC740C2C1686870018CF90 /* ngodbConnector.swift in Sources */,
 				EAD8DEC92BD621EE00CB7466 /* AuthViewModel.swift in Sources */,
 				EA4769372BB13DD900ED3F4F /* SpeechHelper.swift in Sources */,
-				EA1C706F2C2A467000FB6647 /* LaoctionManager.swift in Sources */,
+				EA1C706F2C2A467000FB6647 /* LocationManager.swift in Sources */,
 				EAED591B2BD6730B006A3062 /* NetworkMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,6 +594,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N6RP3H788Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We want to access your location";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Audio id recording ";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -630,6 +631,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N6RP3H788Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We want to access your location";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Audio id recording ";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "You can view a text transcription of your meeting in the app";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

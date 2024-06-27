@@ -19,12 +19,14 @@ class AuthViewModel: ObservableObject{
     private var fullname = ""
     private var email = ""
     private var profileUrl = ""
+    private var userLat = ""
+    private var userLong = ""
     @Published var taskUser: TaskUser?
     private var DEFAULT_PROFILE_URL = "https://drive.usercontent.google.com/download?id=1_0I3TaBVBCGIkjHXhm5bd9hn3ZzU_8AA"
     
     init(){
         
-        taskUser = TaskUser(id: "", fullname: fullname, email: email)
+        taskUser = TaskUser(id: "", fullname: fullname, email: email, userLat: "", userLong: "")
         
         self.userSession = Auth.auth().currentUser
         print("DEBUG: User session is \(String(describing: self.userSession?.uid))")
@@ -66,7 +68,7 @@ class AuthViewModel: ObservableObject{
             self.userSession = user
             self.userIsLoggedIn = true
             print("DEBUG: Did log user in...")
-            self.taskUser = TaskUser(id: user.uid, fullname: self.fullname, email: email)
+            self.taskUser = TaskUser(id: user.uid, fullname: self.fullname, email: email, userLat: self.userLat, userLong: self.userLong)
             self.userIsLoggedIn = true
             
         }
@@ -86,12 +88,15 @@ class AuthViewModel: ObservableObject{
             print("DEBUG: Registered user successfully")
             print("DEBUG: User is \(String(describing: self.userSession))")
             
-            self.taskUser = TaskUser(id: user.uid, fullname: fullname, email: email)
+            self.taskUser = TaskUser(id: user.uid, fullname: fullname, email: email, userLat: "", userLong: "")
             let data = [
                         "userId": user.uid,
                         "email": email,
                         "fullname": fullname,
-                        "profileUrl": self.DEFAULT_PROFILE_URL]
+                        "profileUrl": self.DEFAULT_PROFILE_URL,
+                        "userLat": "",
+                        "userLong": ""
+            ]
             
             self.ref.child("users").child(user.uid).setValue(data)
             self.userIsLoggedIn = true
