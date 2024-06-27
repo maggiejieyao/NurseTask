@@ -13,6 +13,7 @@ final class LocationManager: NSObject, ObservableObject{
     private var locationManager = CLLocationManager()
     @Published var region:MapCameraPosition = .userLocation(fallback: .automatic)
     @Published var lastKnownLocation: CLLocationCoordinate2D?
+    @Published var annotations:[CLLocationCoordinate2D] = []
     
     override init() {
         super.init()
@@ -36,7 +37,6 @@ final class LocationManager: NSObject, ObservableObject{
       }
     }
     
-    
 }
 
 extension LocationManager: CLLocationManagerDelegate {
@@ -50,8 +50,9 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        lastKnownLocation = locations.first?.coordinate
         locationManager.stopUpdatingLocation()
+        lastKnownLocation = locations.first?.coordinate
+        //AuthViewModel().updateLocation(coordinate: lastKnownLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0))
         locations.last.map {
                 region = MapCameraPosition.region(MKCoordinateRegion(
                 center: $0.coordinate,
@@ -61,3 +62,8 @@ extension LocationManager: CLLocationManagerDelegate {
     }
 }
 
+extension CLLocationCoordinate2D: Identifiable {
+    public var id: String {
+        "\(latitude)-\(longitude)"
+    }
+}

@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import FirebaseCore
+import CoreLocation
 
 class AuthViewModel: ObservableObject{
     @Published var userSession: User?
@@ -23,10 +24,11 @@ class AuthViewModel: ObservableObject{
     private var userLong = ""
     @Published var taskUser: TaskUser?
     private var DEFAULT_PROFILE_URL = "https://drive.usercontent.google.com/download?id=1_0I3TaBVBCGIkjHXhm5bd9hn3ZzU_8AA"
+    private var locations:[CLLocationCoordinate2D] = []
     
     init(){
         
-        taskUser = TaskUser(id: "", fullname: fullname, email: email, userLat: "", userLong: "")
+        taskUser = TaskUser(id: "", fullname: fullname, email: email, userLat: userLat, userLong: userLong)
         
         self.userSession = Auth.auth().currentUser
         print("DEBUG: User session is \(String(describing: self.userSession?.uid))")
@@ -38,16 +40,18 @@ class AuthViewModel: ObservableObject{
                 self.fullname = value?["fullname"] as? String ?? ""
                 self.email = value?["email"] as? String ?? ""
                 self.profileUrl = value?["profileUrl"] as? String ?? ""
+                self.userLat = value?["userLat"] as? String ?? ""
+                self.userLong = value?["userLong"] as? String ?? ""
                 
                 self.taskUser?.setEmail(email: self.email)
                 self.taskUser?.setFullname(fullname: self.fullname)
                 self.taskUser?.setUrl(profileUrl: self.profileUrl)
-                
+                self.taskUser?.setUserLat(userLat: self.userLat)
+                self.taskUser?.setUserLong(userLong: self.userLong)
             }){error in
                 print(error.localizedDescription)
             }
         }
-        
         
     }
     
@@ -124,6 +128,39 @@ class AuthViewModel: ObservableObject{
     }
     
     
+    func updateLocation(coordinate:CLLocationCoordinate2D){
+        if(userSession?.uid != nil){
+            let userLat:String = "\(coordinate.latitude)"
+            let userLong:String = "\(coordinate.longitude)"
+            
+            ref.child("users").child(userSession?.uid ?? "").child("userLat").setValue(userLat)
+            ref.child("users").child(userSession?.uid ?? "").child("userLong").setValue(userLong)
+        }
+    }
+    
+    func getLocation()->[CLLocationCoordinate2D]{
+        let userRef = self.ref.child("users")
+        userRef.observeSingleEvent(of:.value, with: { snapshot in
+            for child in snapshot.children{
+                print(child)
+                guard let snap = child as? DataSnapshot else { return }
+                guard let value = snap.value as? [String: Any] else { return }
+                do{
+                    let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                    //print("jsonData\(jsonData)")
+                    let userArr = try JSONDecoder().decode(TaskUser.self, from: jsonData)
+                    let userLat = Double(userArr.userLat)
+                    let userLong = Double(userArr.userLong)
+                    let coordinates = CLLocationCoordinate2D(latitude: userLat! , longitude: userLong!)
+                    self.locations.append(coordinates)
+                    print("locations\(self.locations)")
+                }catch{
+                    print(error)
+                }
+            }
+        })
+        return locations
+    }
     
 }
 
