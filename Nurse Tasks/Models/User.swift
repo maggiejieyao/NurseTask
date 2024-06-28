@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TaskUser:Identifiable, Codable{
+struct TaskUser:Identifiable, Codable, Hashable{
     let id: String
     var fullname: String
     var email: String

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		89C27A112C2D2E5C00068171 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C27A102C2D2E5C00068171 /* Message.swift */; };
+		89C27A132C2D2E9C00068171 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C27A122C2D2E9C00068171 /* Conversation.swift */; };
+		89C27A152C2D2F8300068171 /* ConversationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C27A142C2D2F8300068171 /* ConversationsView.swift */; };
+		89C27A172C2D2FA100068171 /* NewMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C27A162C2D2FA100068171 /* NewMessageView.swift */; };
+		89C27A192C2D307B00068171 /* ConversationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C27A182C2D307B00068171 /* ConversationDetailView.swift */; };
+		89C27A1D2C2D86B600068171 /* WebSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C27A1C2C2D86B600068171 /* WebSocketManager.swift */; };
+		89EBF2032C2EC2490088ED31 /* ConversationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EBF2022C2EC2490088ED31 /* ConversationHelper.swift */; };
+		89EBF2052C2F00460088ED31 /* RingingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EBF2042C2F00460088ED31 /* RingingView.swift */; };
+		89EBF2072C2F11F20088ED31 /* ShareTaskConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89EBF2062C2F11F20088ED31 /* ShareTaskConfirmationView.swift */; };
 		D8078B292AFCA45B002B28DA /* Nurse_TasksApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8078B282AFCA45B002B28DA /* Nurse_TasksApp.swift */; };
 		D8078B2B2AFCA45B002B28DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8078B2A2AFCA45B002B28DA /* ContentView.swift */; };
 		D8078B2F2AFCA45E002B28DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8078B2E2AFCA45E002B28DA /* Assets.xcassets */; };
@@ -74,6 +83,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		89C27A102C2D2E5C00068171 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		89C27A122C2D2E9C00068171 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		89C27A142C2D2F8300068171 /* ConversationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsView.swift; sourceTree = "<group>"; };
+		89C27A162C2D2FA100068171 /* NewMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageView.swift; sourceTree = "<group>"; };
+		89C27A182C2D307B00068171 /* ConversationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetailView.swift; sourceTree = "<group>"; };
+		89C27A1C2C2D86B600068171 /* WebSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebSocketManager.swift; sourceTree = "<group>"; };
+		89EBF2022C2EC2490088ED31 /* ConversationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationHelper.swift; sourceTree = "<group>"; };
+		89EBF2042C2F00460088ED31 /* RingingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingingView.swift; sourceTree = "<group>"; };
+		89EBF2062C2F11F20088ED31 /* ShareTaskConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareTaskConfirmationView.swift; sourceTree = "<group>"; };
 		D8078B252AFCA45B002B28DA /* Nurse Tasks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nurse Tasks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8078B282AFCA45B002B28DA /* Nurse_TasksApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nurse_TasksApp.swift; sourceTree = "<group>"; };
 		D8078B2A2AFCA45B002B28DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,7 +106,7 @@
 		EA08BA6F2B06DE830038EDCF /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		EA08BAA82B06EDF50038EDCF /* DetailTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTaskView.swift; sourceTree = "<group>"; };
 		EA08BAAA2B06FE310038EDCF /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
-		EA1C706E2C2A467000FB6647 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		EA1C706E2C2A467000FB6647 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.xcfilelist; };
 		EA22C09F2C2CD4830088DE51 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		EA4614312C1E29E3008CD9CE /* TaskViewNodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewNodeModel.swift; sourceTree = "<group>"; };
 		EA4769302BB12CC000ED3F4F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -212,6 +230,10 @@
 				D8078B2A2AFCA45B002B28DA /* ContentView.swift */,
 				EA4769392BB152B200ED3F4F /* InputView.swift */,
 				EACAC57D2B92FFC7009E5B6C /* SettingsRowView.swift */,
+				89C27A142C2D2F8300068171 /* ConversationsView.swift */,
+				89C27A162C2D2FA100068171 /* NewMessageView.swift */,
+				89C27A182C2D307B00068171 /* ConversationDetailView.swift */,
+				89EBF2042C2F00460088ED31 /* RingingView.swift */,
 				EACAC57C2B92FF44009E5B6C /* Task */,
 			);
 			path = Views;
@@ -225,6 +247,9 @@
 				EAED591A2BD6730B006A3062 /* NetworkMonitor.swift */,
 				EA08BA6D2B06DAF80038EDCF /* data.json */,
 				EAD8DEC82BD621EE00CB7466 /* AuthViewModel.swift */,
+				89C27A102C2D2E5C00068171 /* Message.swift */,
+				89C27A122C2D2E9C00068171 /* Conversation.swift */,
+				89EBF2022C2EC2490088ED31 /* ConversationHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -237,6 +262,7 @@
 				EA4769362BB13DD900ED3F4F /* SpeechHelper.swift */,
 				EA4614312C1E29E3008CD9CE /* TaskViewNodeModel.swift */,
 				EA1C706E2C2A467000FB6647 /* LocationManager.swift */,
+				89C27A1C2C2D86B600068171 /* WebSocketManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -255,6 +281,7 @@
 				EACAC5782B92E129009E5B6C /* TaskProfileView.swift */,
 				EA08BAAA2B06FE310038EDCF /* AddTaskView.swift */,
 				EA08BAA82B06EDF50038EDCF /* DetailTaskView.swift */,
+				89EBF2062C2F11F20088ED31 /* ShareTaskConfirmationView.swift */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -408,18 +435,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89C27A192C2D307B00068171 /* ConversationDetailView.swift in Sources */,
 				EABD08E12B10073300BA0D78 /* RemindManager.swift in Sources */,
 				EA08BA702B06DE830038EDCF /* TaskModel.swift in Sources */,
 				EABD08DF2B0F871800BA0D78 /* TaskViewModel.swift in Sources */,
+				89C27A152C2D2F8300068171 /* ConversationsView.swift in Sources */,
+				89C27A112C2D2E5C00068171 /* Message.swift in Sources */,
 				EACAC5792B92E129009E5B6C /* TaskProfileView.swift in Sources */,
 				D8078B2B2AFCA45B002B28DA /* ContentView.swift in Sources */,
 				EA08BAAB2B06FE310038EDCF /* AddTaskView.swift in Sources */,
 				EACAC57E2B92FFC7009E5B6C /* SettingsRowView.swift in Sources */,
+				89C27A1D2C2D86B600068171 /* WebSocketManager.swift in Sources */,
+				89C27A172C2D2FA100068171 /* NewMessageView.swift in Sources */,
 				EA22C0A02C2CD4830088DE51 /* MapView.swift in Sources */,
 				EA4614322C1E29E3008CD9CE /* TaskViewNodeModel.swift in Sources */,
+				89EBF2032C2EC2490088ED31 /* ConversationHelper.swift in Sources */,
+				89C27A132C2D2E9C00068171 /* Conversation.swift in Sources */,
+				89EBF2052C2F00460088ED31 /* RingingView.swift in Sources */,
 				EA08BAA92B06EDF50038EDCF /* DetailTaskView.swift in Sources */,
 				EACAC5802B931255009E5B6C /* User.swift in Sources */,
 				EA47693A2BB152B200ED3F4F /* InputView.swift in Sources */,
+				89EBF2072C2F11F20088ED31 /* ShareTaskConfirmationView.swift in Sources */,
 				D8078B292AFCA45B002B28DA /* Nurse_TasksApp.swift in Sources */,
 				EAD8DEC92BD621EE00CB7466 /* AuthViewModel.swift in Sources */,
 				EA4769372BB13DD900ED3F4F /* SpeechHelper.swift in Sources */,

@@ -19,6 +19,7 @@ struct ContentView: View {
     @State private var confirmedPassword = ""
     @State private var showNetworkAlert = false
     @StateObject var monitor = Monitor()
+    @StateObject var webSocketManager = WebSocketManager(url: URL(string: "ws://localhost:8080")!)
     
     var body: some View {
         
@@ -27,6 +28,11 @@ struct ContentView: View {
                 TaskProfileView()
                     .tabItem{
                         Image(systemName: "doc.badge.plus")
+                    }
+                ConversationsView()
+                    .environmentObject(webSocketManager)
+                    .tabItem {
+                        Image(systemName: "message.fill")
                     }
                 
                 profile
@@ -37,9 +43,7 @@ struct ContentView: View {
                     .tabItem {
                         Image(systemName: "map.fill")
                     }
-                 
             }
-            
         }else{
             contentLogin
         }
